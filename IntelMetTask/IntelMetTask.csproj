@@ -91,4 +91,10 @@
         <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <ItemGroup>
+        <Files Include="$(SolutionDir)data\**" />
+    </ItemGroup>
+    <Target Name="CopyFiles" AfterTargets="Build">
+        <Copy SourceFiles="@(Files)" DestinationFolder="$(TargetDir)/data/%(RecursiveDir)" />
+    </Target>
 </Project>
