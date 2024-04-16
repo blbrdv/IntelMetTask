@@ -6,15 +6,24 @@
         xmlns:local="clr-namespace:IntelMetTask"
         mc:Ignorable="d"
         xmlns:oxy="http://oxyplot.org/wpf"
-        Title="IntelMetTask" Height="600" Width="800">
+        Title="IntelMetTask" Height="600" Width="800" MinHeight="600" MinWidth="800">
     <Window.DataContext>
-        <local:LiveChartViewModel/>
+        <local:MainWindowViewModel/>
     </Window.DataContext>
     <Grid>
-        <oxy:Plot Title="{Binding Title}">
-            <oxy:Plot.Series>
-                <oxy:LineSeries ItemsSource="{Binding Points}"/>
-            </oxy:Plot.Series>
-        </oxy:Plot>
+        <DockPanel Height="Auto" Width="Auto" LastChildFill="True">
+            <Button Click="ShowFilePicker_OnClick" 
+                    Width="90" Margin="10" 
+                    Content="Открыть" 
+                    DockPanel.Dock="Top" 
+                    HorizontalAlignment="Left"/>
+            
+            <oxy:Plot Title="{Binding Title}">
+                <oxy:Plot.Series>
+                    <oxy:LineSeries ItemsSource="{Binding Original}" Color="Blue"/>
+                    <!-- <oxy:LineSeries ItemsSource="{Binding NoNoise}" Color="Red"/> -->
+                </oxy:Plot.Series>
+            </oxy:Plot>
+        </DockPanel>
     </Grid>
 </Window>
