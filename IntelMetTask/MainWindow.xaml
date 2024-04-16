@@ -18,10 +18,10 @@
                     DockPanel.Dock="Top" 
                     HorizontalAlignment="Left"/>
             
-            <oxy:Plot Title="{Binding Title}">
+            <oxy:Plot Name="Plot" Title="{Binding Title}">
                 <oxy:Plot.Series>
                     <oxy:LineSeries ItemsSource="{Binding Original}" Color="Blue"/>
-                    <!-- <oxy:LineSeries ItemsSource="{Binding NoNoise}" Color="Red"/> -->
+                    <oxy:LineSeries ItemsSource="{Binding NoNoise}" Color="Red"/>
                 </oxy:Plot.Series>
             </oxy:Plot>
         </DockPanel>
