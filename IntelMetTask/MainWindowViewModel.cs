@@ -13,7 +13,7 @@ namespace IntelMetTask
 
         public MainWindowViewModel()
         {
-            // this.OpenFile(Path.Combine(Constants.DataPath, "SlabMeasure0132981.json"));
+            this.OpenFile(Path.Combine(Constants.DataPath, "SlabMeasure0132981.json"));
         }
 
         public ICommand OpenFileCommand => new RelayCommand(OpenFile, CanOpenFile);
@@ -34,9 +34,15 @@ namespace IntelMetTask
                 {
                     this.Original.Add(new DataPoint(measure.Value, measure.Speed));
                 }
+                this.NoNoise.Clear();
+                foreach (var distance in NoiseRemover.CleanData(data.Distances))
+                {
+                    this.NoNoise.Add(new DataPoint(distance.Value, distance.Speed));
+                }
 
                 this.OnPropertyChanged(nameof(this.Title));
                 this.OnPropertyChanged(nameof(this.Original));
+                this.OnPropertyChanged(nameof(this.NoNoise));
             }
         }
 
@@ -67,12 +73,20 @@ namespace IntelMetTask
             }
         }
 
-        // Implement the OnPropertyChanged method
+        private IList<DataPoint> _noNoise = new List<DataPoint>();
+        public IList<DataPoint> NoNoise
+        {
+            get => this._noNoise;
+            private set
+            {
+                this._original = value;
+                this.OnPropertyChanged(nameof(this.NoNoise));
+            }
+        }
+
         private void OnPropertyChanged(string propertyName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        public IList<DataPoint> NoNoise { get; private set; } = new List<DataPoint>();
     }
 }

@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace IntelMetTask
 {

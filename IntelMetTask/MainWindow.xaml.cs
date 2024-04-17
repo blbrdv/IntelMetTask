@@ -1,7 +1,5 @@
-﻿using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 using Microsoft.Win32;
-using OxyPlot.Series;
 
 namespace IntelMetTask
 {
